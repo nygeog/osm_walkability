@@ -1,0 +1,4 @@
+*.csv
+*.pyc
+env/*
+data/*

@@ -1,0 +1,16 @@
+-e git+https://github.com/CartoDB/carto-python.git@1.0.0#egg=carto-1.0.0
+pyrestcli
+pandas==0.19.2
+webcolors==1.7
+ipython
+matplotlib
+requests
+jupyter
+cartoframes
+ipywidgets
+-e git+git://github.com/CartoDB/cartodb-python.git#egg=cartodb
+requests_oauthlib
+    
+    python -m pip install -U pip setuptools
+    pip install wheel
+    pip install -U numpy scipy scikit-learn

@@ -1,0 +1,2 @@
+SAVE_FOLDER = 'data/'
+INPUT_FOLDER = SAVE_FOLDER+'input/'
