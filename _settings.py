@@ -1,2 +1,6 @@
 SAVE_FOLDER = 'data/'
 INPUT_FOLDER = SAVE_FOLDER+'input/'
+
+# Carto 
+USERNAME="dms2203"
+APIKEY="eb4e90135e42f41bda36e58b7e9c1a660acd98d1"

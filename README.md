@@ -1,6 +1,35 @@
 # OSM Walkability
 Training on Open Street Map derived features for constructing a walkability index
 
+
+## Data 
+
+OSM New York NY - Mapzen Metro Extract - accessed 2017/08/21
+
+## Methods
+
+Open .osm.pbf, converted to .csv in QGIS. 
+
+	n = 234,942
+
+### How do I want to structure the OSM data? 
+
+* X
+* Y
+* osm_id
+* name
+	* This is the OSM feature name, less important for categoriezation. 
+* barrier
+* highway
+* ref
+* address
+* is_in
+* place
+* man_made
+* other_tags
+	* A lot of information is in here, most tags with specific values
+
+
 ## Resources:
 
 https://github.com/mvexel/overpass-api-python-wrapper
