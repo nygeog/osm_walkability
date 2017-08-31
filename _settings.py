@@ -1,5 +1,7 @@
 SAVE_FOLDER = 'data/'
 INPUT_FOLDER = SAVE_FOLDER+'input/'
+PROCESSING_FOLDER = SAVE_FOLDER+'processing/'
+
 
 # Carto 
 USERNAME="dms2203"
