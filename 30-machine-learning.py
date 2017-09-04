@@ -2,15 +2,15 @@ import pandas as pd
 import numpy as np
 # from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, ExtraTreesClassifier, AdaBoostClassifier #try xg boost
 # from sklearn.linear_model import SGDClassifier
-# from sklearn.cross_validation import cross_val_score
+from sklearn.cross_validation import cross_val_score
 # from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import DecisionTreeRegressor, ExtraTreeRegressor
 from datetime import datetime
 from sklearn import metrics
  
 print datetime.now()
  
-wd = 'data/'
+wd = 'data/machine_learning/'
 
 def one_hot(D, index_dict=None, num_indexes=-1):
     # dictionary D.column -> value -> index in output
@@ -46,81 +46,73 @@ def one_hot(D, index_dict=None, num_indexes=-1):
  
  
 def main():
-    data = pd.read_csv(wd + 'machine_learning/train.csv').astype(np.float32)
+    data = pd.read_csv(wd + 'train.csv').astype(np.float32)
     data = data.replace(np.inf, 0)
     data = data.drop('geoid',axis=1)
     data = data.fillna(data.mean())
     
-    print data.dtypes
+    #print data.dtypes
     t0 = datetime.now()
     #X, index_dict, num_indexes = one_hot(data[data.columns[:-1]])
     X = data[data.columns.difference(['t10walk'])]
-    print "one hot training set time:", (datetime.now() - t0)
+    #print "one hot training set time:", (datetime.now() - t0)
     Y = data['t10walk']
- 
-    #clf = SGDClassifier() #Ran this
- 
-    # fit here
-    # TRY THIS RANDOM FOREST AT 700
-    # Maybe try SGD or kernel approximation
-    # http://scikit-learn.org/stable/tutorial/machine_learning_map/
-    #clf = RandomForestClassifier(n_estimators=700)
-    #clf = ExtraTreesClassifier()
+
     clf = DecisionTreeRegressor()
- 
-     
- 
-    #Try This:
-    #sklearn.kernel_approximation.RBFSampler
- 
-     
+    #clf = ExtraTreeRegressor()
+
     print datetime.now()
  
     t0 = datetime.now()
     clf.fit(X, Y)
     print "training time:", (datetime.now() - t0)
-    # print "training accuracy:", clf.score(X, Y)
+    print "training accuracy:", clf.score(X, Y)
  
-    #quiz = pd.read_csv('quiz.csv')
-    quiz = pd.read_csv(wd+'machine_learning/test.csv').astype(np.float32)
+    quiz = pd.read_csv(wd + 'test.csv').astype(np.float32)
     quiz = quiz.drop('geoid',axis=1)
     quiz = quiz.replace(np.inf, 0)
-    quiz = quiz.fillna(quiz.mean())
+    #quiz = quiz.fillna(quiz.mean())
 
-    for i in quiz.dtypes:
-        print i
+    # for i in quiz.dtypes:
+    #     print i
 
 
     t0 = datetime.now()
     # Xtest, _, _ = one_hot(quiz, index_dict, num_indexes)
     Xtest = quiz[quiz.columns.difference(['t10walk'])]
-    #from IPython import embed 
-    #embed()
-    print "one hot test set time:", (datetime.now() - t0)
+
+    #print "one hot test set time:", (datetime.now() - t0)
     # do prediction and save it
     prediction = clf.predict(Xtest)
+
+    print 'cross validating...'
+    scores = cross_val_score(clf, X, Y, cv=5)
+    print scores
+    
  
     ftime = str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-')
     print ftime
  
-    with open(wd+'machine_learning/output/myoutput-'+ftime+'.csv', 'w') as f:
+    ouCSV = wd+'output/myoutput-'+ftime+'.csv'
+
+    with open(ouCSV, 'w') as f:
         f.write('id,prediction\n')
         the_id = 1
         for p in prediction:
             f.write("%s,%s\n" % (the_id, p))
             the_id += 1
  
-    # print 'cross validating...'
-    # scores = cross_val_score(clf, X, Y, cv=5)
-    # print scores
- 
-    #print prediction.score(X, Y)
+
     importance = pd.DataFrame(zip(data.columns.difference(['t10walk']), clf.feature_importances_) )
     importance.columns = ['feature', 'importance']
     importance = importance.sort_values('importance',ascending=False)
-    importance.to_csv(wd+'machine_learning/output/myoutput-'+ftime+'_importances.csv', index=False)
-    print(clf.feature_importances_)
+    importance.to_csv(wd+'output/myoutput-'+ftime+'_importances.csv', index=False)
+    #print(clf.feature_importances_)
+
+    
  
 if __name__ == '__main__':
     main()
+
+
 

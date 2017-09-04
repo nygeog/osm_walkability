@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-inCSV = 'data/processing/walkability_highway_features.csv'
+inCSV = 'data/processing/walkability_highway_tags_features.csv'
 
 df = pd.read_csv(inCSV)
 
