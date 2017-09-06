@@ -1,0 +1,24 @@
+ogr2ogr -f CSV "[temporary file].csv" Users/danielmsheehan/GitHub/osm_walkability/data/input/new-york_new-york.osm.pb new-york_new-york.osmogr2ogr -f CSV "[temporary file].csv" Users/danielmsheehan/GitHub/osm_walkability/data/input/new-york_new-york.osm.pb new-york_new-york.osm
+
+/
+ogr2ogr -f CSV "data/input/rando/points.csv" data/input/new-york_new-york.osm.pbf 
+
+
+ogr2ogr -f CSV data/input/new-york_new-york.osm.pbf -sql "SELECT name, the_geom FROM points
+
+ogr2ogr -f CSV "data/input/rando/points.csv" data/input/new-york_new-york.osm.pbf -geomfield field
+
+
+ogr2ogr -f CSV "data/input/rando4/points.csv" data/input/new-york_new-york.osm.pbf GEOMETRY=AS_WKT
+
+ogr2ogr -f 'ESRI Shapefile' "data/input/rando5/" data/input/new-york_new-york.osm.pbf SHPT=POINT/ARC/POLYGON/MULTIPOINT/POINTZ/ARCZ/POLYGONZ/MULTIPOINTZ
+ogr2ogr -f CSV "data/input/rando5/points.csv" data/input/rando5/points.shp GEOMETRY=AS_WKT
+
+
+
+
+## USE THIS - pbf to spatiallite then to csv yay, ya!!!!!
+
+
+ogr2ogr -f "SQLite" -dsco SPATIALITE=YES data/input/targetsqlite.db data/input/new-york_new-york.osm.pbf 
+ogr2ogr -f "CSV" commandtmp.csv data/input/targetsqlite.db -lco GEOMETRY=AS_XY -progress -explodecollections -sql "select * from points"

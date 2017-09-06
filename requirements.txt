@@ -14,3 +14,4 @@ requests_oauthlib
     python -m pip install -U pip setuptools
     pip install wheel
     pip install -U numpy scipy scikit-learn
+    pip install gdal
