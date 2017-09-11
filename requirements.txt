@@ -15,3 +15,13 @@ requests_oauthlib
     pip install wheel
     pip install -U numpy scipy scikit-learn
     pip install gdal
+
+
+
+    graphviz
+
+
+
+    ### HOMEBREW
+
+brew install graphviz

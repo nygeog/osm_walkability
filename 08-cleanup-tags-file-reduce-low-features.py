@@ -10,16 +10,16 @@ dfLen = len(df.index)
 keeperCols = []
 
 for i in df.columns:
-	countNulls = df[i].isnull().sum()
-	pctNull = countNulls/(dfLen * 1.0)
-	if df[i].nunique() < 500:
-		if pctNull < 0.99:
-			print i, pctNull, df[i].nunique()
-			keeperCols.append(i)
+    countNulls = df[i].isnull().sum()
+    pctNull = countNulls/(dfLen * 1.0)
+    if df[i].nunique() < 500:
+        if pctNull < 0.99:
+            print i, pctNull, df[i].nunique()
+            keeperCols.append(i)
 
-keeperCols 	
-	
-df = df[keeperCols+['osm_id']]		
+keeperCols     
+    
+df = df[keeperCols+['osm_id']]        
 
 ouCSV = 'data/processing/osm_tags_pivot_cln.csv'
 

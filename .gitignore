@@ -2,6 +2,8 @@
 *.pyc
 env/*
 data/*
+data_v2/*
 _settings.py
 02-curl-upload-carto-data-import-api.txt
 *checkpoint.ipynb
+*.dot

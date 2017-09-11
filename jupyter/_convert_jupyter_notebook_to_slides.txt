@@ -1,0 +1,4 @@
+jupyter nbconvert Untitled1.ipynb --to slides --post serve
+
+
+jupyter nbconvert OSM_Machine_Learning_Walkability --to slides --post serve

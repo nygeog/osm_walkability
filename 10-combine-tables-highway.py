@@ -24,19 +24,19 @@ df = df.drop(['osm_id','gnis_created','gnis_county_id','gnis_state_id','capacity
 dfStringCols = []
 
 for i in df.columns:
-	if df[i].dtype == 'object':
-		dfStringCols.append(i)
+    if df[i].dtype == 'object': #select all non numerical columns
+        dfStringCols.append(i)
 
 df['index_col'] = df.index
 
 colTotal = 0
 for i in dfStringCols:
-	print i
-	one_hot = pd.get_dummies(df[i])
-	colTotal = colTotal + len(one_hot.columns)
-	one_hot = one_hot.rename(columns = lambda x : i + '_one_hot_' + x)
-	one_hot['index_col'] = one_hot.index
-	df = df.merge(one_hot, on='index_col', how='left')
+    print i
+    one_hot = pd.get_dummies(df[i])
+    colTotal = colTotal + len(one_hot.columns)
+    one_hot = one_hot.rename(columns = lambda x : i + '_one_hot_' + x)
+    one_hot['index_col'] = one_hot.index
+    df = df.merge(one_hot, on='index_col', how='left')
 
 df = df.drop(dfStringCols, axis=1)
 
@@ -49,12 +49,9 @@ df = df.fillna(0)
 colsList = df.columns
 
 for i in colsList:
-	if i != 'geoid' and i != 'osm_id'  and i != 't10walk'  and i != 't10lndkm2':
-		print i 
-		df[i] = df[i]/df['t10lndkm2'] # get osm feature density by tract area
-
-### GET A DENSITY OF AMENITIES AND NON_NUMERICAL DATA
-### One hot before calculating densities... 
+    if i != 'geoid' and i != 'osm_id'  and i != 't10walk'  and i != 't10lndkm2':
+        print i 
+        df[i] = df[i]/df['t10lndkm2'] # get osm feature density by tract area
 
 
 df = df.drop(['t10lndkm2','index_col'], axis=1)
