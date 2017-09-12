@@ -44,7 +44,7 @@ https://github.com/mvexel/overpass-api-python-wrapper
 
 http://wiki.openstreetmap.org/wiki/Osmconvert
 
-## Project Requirements
+## Project Requirements (needs to be updated, see https://github.com/nygeog/osm_walkability/issues/5
 Project Requirements - for easily getting started with this project using Python. 
 
     virtualenv env
